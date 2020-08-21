@@ -22,3 +22,9 @@
 
 BOJ 1260 : [DFS와 BFS](https://github.com/yoonho0922/Coding-Test/blob/master/boj/baek1260.cpp)  
 
+## Back tracking
+#### 순열
+#### 조합
+
+## 기타
+#### 에라토네스의 체 (소수를 구하는 알고리즘)
