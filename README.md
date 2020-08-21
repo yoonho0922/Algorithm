@@ -26,5 +26,8 @@ BOJ 1260 : [DFS와 BFS](https://github.com/yoonho0922/Coding-Test/blob/master/bo
 #### 순열
 #### 조합
 
+## 트리
+#### 최소신장트리(Minimum Spanning Tree)
+
 ## 기타
 #### 에라토네스의 체 (소수를 구하는 알고리즘)
