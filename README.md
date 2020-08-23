@@ -1,3 +1,4 @@
+[자료구조 정리](https://github.com/yoonho0922/etc/tree/master/Data_structure)
 ## DFS와 BFS
 
 #### 그래프 input 방식
@@ -22,3 +23,12 @@
 
 BOJ 1260 : [DFS와 BFS](https://github.com/yoonho0922/Coding-Test/blob/master/boj/baek1260.cpp)  
 
+## Back tracking
+#### 순열
+#### 조합
+
+## 트리
+#### 최소신장트리(Minimum Spanning Tree)
+
+## 기타
+#### 에라토네스의 체 (소수를 구하는 알고리즘)
