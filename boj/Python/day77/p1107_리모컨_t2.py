@@ -14,24 +14,18 @@ def sol(depth, length):
 
 
 N = input()
-L = len(N)
 M = int(input())
-
-# 잘못된 버튼이 없는 경우
-if M==0:
-    print(L)
-    exit()
-
 wrong = [False]*10
+if M>0:
+    for i in list(map(int, input().split())):
+        wrong[i]=True
 
-for i in list(map(int, input().split())):
-    wrong[i]=True
-
+# 채널 버튼 안 누르는 경우
 ans = abs(int(N)-100)
 
+# 채널 버튼 누르는 경우
 d = []
-
-for i in range(1, L+2):
+for i in range(1, len(N)+2):
     sol(0, i)
 
 print(ans)
