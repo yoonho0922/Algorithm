@@ -10,7 +10,8 @@ F, S, G, U, D = map(int, input().split())
 def bfs():
     q = collections.deque()
     q.append(S)
-    visited = [0] * (F + 1)
+    visited = [-1] * (F + 1)
+    visited[S] = 0
 
     while q:
         cur = q.popleft()
@@ -22,10 +23,10 @@ def bfs():
         up_floor = cur + U
         down_floor = cur - D
 
-        if up_floor <= F and visited[up_floor] == 0:
+        if up_floor <= F and visited[up_floor] == -1:
             q.append(up_floor)
             visited[up_floor] = visited[cur] + 1
-        if down_floor >= 1 and visited[down_floor] == 0:
+        if down_floor >= 1 and visited[down_floor] == -1:
             q.append(down_floor)
             visited[down_floor] = visited[cur] + 1
     print('use the stairs')
