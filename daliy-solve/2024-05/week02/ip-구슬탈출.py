@@ -1,6 +1,7 @@
 # https://www.acmicpc.net/problem/13460
 
 from collections import defaultdict
+from collections import deque
 
 dy = [0,0,1,-1]
 dx = [1,-1,0,0]
@@ -42,40 +43,43 @@ def tilt(cy, cx, direct, antY, antX):
     # 구멍이 없고 다른 구슬도 없다면, 끝 지점으로 이동
     return toMove
 
+def bfs(r, b):
+    q = deque()
 
-def dfs(r, b, depth):
-    global ans
+    q.append([r[0],r[1],b[0],b[1]])
+    visited[R[0],R[1],B[0],B[1]] = True
 
-    # 가지치기
-    if depth > 10:
-        return
+    cnt = 0
 
-    # 성공했다면
-    if r == goal:
-        ans = depth if ans==-1 else min(ans, depth)
-        print('success!', depth, r, goal, '\n')
-        return
+    while q:
+        if cnt > 10:
+            return -1
 
-    # 상하좌우 기울기 동 서 남 북
-    for i in range(4):
-        # 기울이고 이동
-        nr = tilt(r[0], r[1], i, b[0], b[1])
-        nb = tilt(b[0], b[1], i, r[0], r[1])
+        for _ in range(len(q)):
+            rcy, rcx, bcy, bcx = q.popleft()
 
+            # 파랑이 빠져나오면 무시
+            if G[bcy][bcx] == 'O':
+                continue
 
-        # 파랑이 빠져나오면 실패
-        if G[nb[0]][nb[1]] == 'O':
-            return
+            # 파랑이 안빠져나오고 빨간구슬이 나왔다면 성공
+            if [rcy, rcx] == goal:
+                return cnt
 
-        # 탐색한 루트가 아니라면 조사
-        if not visited[(nr[0], nr[1], nb[0], nb[1])]:
+            # 상하좌우 기울기 동 서 남 북
+            for i in range(4):
+                # 기울이고 이동
+                nr = tilt(rcy, rcx, i, bcy, bcx)
+                nb = tilt(bcy, bcx, i, rcy, rcx)
 
-            print('nr, nb', '-'*depth, i, nr, nb)
-            print()
+                # 탐색한 루트가 아니라면 조사
+                if not visited[(nr[0], nr[1], nb[0], nb[1])]:
+                    visited[(nr[0], nr[1], nb[0], nb[1])] = True
+                    q.append([nr[0], nr[1], nb[0], nb[1]])
 
-            visited[(nr[0], nr[1], nb[0], nb[1])] = True
-            dfs(nr, nb, depth + 1)
+        cnt += 1
 
+    return -1
 
 N, M = map(int,input().split())
 G = []
@@ -92,16 +96,5 @@ for i in range(N):
     G.append(row)
 
 visited = defaultdict(bool) # (ry,rx,by,bx) 방문 여부
-visited[R[0],R[1],B[0],B[1]] = True
 
-ans = -1
-
-dfs(R, B, 0)
-
-print(ans)
-
-
-# logging
-for i in range(N):
-    print(G[i])
-print(R, B, goal)
+print(bfs(R, B))
