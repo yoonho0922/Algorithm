@@ -7,11 +7,7 @@ def back_track(partial, start):
         ans += 1
 
     for i in range(start, N):
-        if not visited[i]:
-            visited[i] = True
-            # print(partial+ [numbers[i]])
-            back_track(partial + [numbers[i]], i+1)
-            visited[i] = False
+        back_track(partial + [numbers[i]], i+1)
 
 
 N, S = map(int, input().split())
