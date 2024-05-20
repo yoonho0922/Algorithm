@@ -14,9 +14,6 @@ def bfs(N, K):
     while q:
         now = q.popleft()
 
-        if now == K:
-            return counts[now]
-
         # 0에서 시작하는 경우 예외 처리
         if now == 0:
             q.append(1)
@@ -26,9 +23,6 @@ def bfs(N, K):
         # 순간 이동
         teleport = now * 2
         while teleport <= MAX_LENGTH:
-            if teleport == K:
-                return counts[now]
-
             if counts[teleport] == -1:
                 q.append(teleport)
                 counts[teleport] = counts[now]
@@ -41,6 +35,8 @@ def bfs(N, K):
             if next <= MAX_LENGTH and counts[next] == -1:
                 q.append(next)
                 counts[next] = counts[now] + 1
+
+    return counts[K]
 
 N, K = map(int, input().split())
 
