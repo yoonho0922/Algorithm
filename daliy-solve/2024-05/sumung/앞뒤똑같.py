@@ -1,3 +1,5 @@
+# 시간초과
+
 import sys
 readline = sys.stdin.readline
 
@@ -30,5 +32,3 @@ for _ in range(M):
         print('YES')
     else:
         print('NO')
-
-equal
