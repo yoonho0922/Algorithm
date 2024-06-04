@@ -13,4 +13,4 @@ for i in range(1, N):
     else:
         dp.append(dp[i-1] * nums[i])
 
-print('%0.3f' % a)
+print('%0.3f' % max(dp))
