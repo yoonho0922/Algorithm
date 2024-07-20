@@ -1,6 +1,6 @@
 # https://www.acmicpc.net/problem/1735
 
-
+# 유클리드 호제법: GDC(a,b) = GDC(b%a, a)
 def get_gdc(x, y):
     while x % y != 0:
         mod = x % y
