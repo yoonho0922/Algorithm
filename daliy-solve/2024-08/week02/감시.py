@@ -5,20 +5,19 @@
 # 3. depth 끝에 도달했을 때 grid 복사 및 방향에 따른 시야 검사
 
 MAX_AREA=8*8
+dy = [0, -1, 0, 1]
+dx = [1, 0, -1, 0]
 
 
 def see_straight(grid, y, x, direct):
-    directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
-    dy, dx = directions[direct]
-
     ny, nx = y, x
     while 0 <= ny < N and 0 <= nx < M:
         if grid[ny][nx] == 0:
             grid[ny][nx] = 9
         elif grid[ny][nx] == 6:
             break
-        ny += dy
-        nx += dx
+        ny += dy[direct]
+        nx += dx[direct]
 
 
 def check_vision(directions):
