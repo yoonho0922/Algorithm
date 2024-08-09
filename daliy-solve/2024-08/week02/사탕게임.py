@@ -16,7 +16,7 @@ def check_longest(grid):
     return longest
 
 def solve_row(grid):
-    longest = 0
+    longest = 1
     for i in range(N-1):
         for j in range(N):
             if grid[i][j] != grid[i+1][j]:
