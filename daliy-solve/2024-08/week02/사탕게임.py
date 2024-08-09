@@ -1,53 +1,39 @@
 # https://www.acmicpc.net/problem/3085
 
-def switch_row_and_get_longest(grid):
-    longest = 0
 
-    for y in range(N-1):
-        for x in range(N):
-            if grid[y][x] == grid[y + 1][x]:
-                continue
-            grid[y][x], grid[y + 1][x] = grid[y + 1][x], grid[y][x]
-            longest = max(longest, get_longest_col(grid))
-            grid[y][x], grid[y + 1][x] = grid[y + 1][x], grid[y][x]
-
+def check_longest(grid):
+    longest = 1
+    for i in range(N):
+        length = 1
+        prev = grid[i][0]
+        for j in range(1, N):
+            if prev == grid[i][j]:
+                length += 1
+                longest = max(longest, length)
+            else:
+                length = 1
+            prev = grid[i][j]
     return longest
 
-def get_continuous_col(row, grid):
-    longest, cnt = 0, 1
-    prev = grid[row][0]
-
-    for x in range(1, N):
-        if prev == grid[row][x]:
-            cnt += 1
-            longest = max(longest, cnt)
-        else:
-            cnt = 1
-        prev = grid[row][x]
-
-    return cnt
-
-
-def get_longest_col(grid):
+def solve_row(grid):
     longest = 0
-
-    for y in range(N):
-        continuous = get_continuous_col(y, grid)
-        longest = max(longest, continuous)
-
-    rotated = [list(r) for r in list(zip(*grid))]
-
-    for y in range(N):
-        continuous = get_continuous_col(y, rotated)
-        longest = max(longest, continuous)
-
+    for i in range(N-1):
+        for j in range(N):
+            if grid[i][j] != grid[i+1][j]:
+                grid[i][j], grid[i+1][j] = grid[i+1][j], grid[i][j]
+                longest = max(longest, check_longest(grid))
+                rotated = [list(r) for r in list(zip(*grid))]
+                longest = max(longest, check_longest(rotated))
+                grid[i][j], grid[i+1][j] = grid[i+1][j], grid[i][j]
     return longest
 
+# main
 N = int(input())
 G = [list(input()) for _ in range(N)]
-rotated = [list(r) for r in list(zip(*G))]
+rotated_G = [list(r) for r in list(zip(*G))]
 
-ans = switch_row_and_get_longest(G)
-ans = max(ans, switch_row_and_get_longest(rotated))
+
+ans = solve_row(G)
+ans = max(ans, solve_row(rotated_G))
 
 print(ans)
