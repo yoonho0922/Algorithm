@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public class Main {
+public class P10026_적록색약 {
     static int N;
     static char[][] grid;
     static boolean[][] visited;
