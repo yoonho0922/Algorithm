@@ -18,21 +18,19 @@ def bfs(G, is_know, visited, start):
 
 # 기본 입력
 N, M = map(int, input().split())
-inputs = list(map(int, input().split()))
+# 미리 알고 있는 사람 입력
 is_know = [False] * (N + 1)
-for f in inputs[1:]:
+for f in list(map(int, input().split()))[1:]:
     is_know[f] = True
 
-G = [set() for _ in range(N + 1)]
-
 # 파티 참여자 입력
+G = [set() for _ in range(N + 1)]
 parties = []
 for _ in range(M):
-    inputs = list(map(int, input().split()))
-    parties.append(inputs[1:])
-    participants = inputs[1:]
-    for participant in participants:
-        G[participant].update(participants)
+    party = list(map(int, input().split()))[1:]
+    parties.append(party)
+    for participant in party:
+        G[participant].update(party)
 
 # 진실 전파
 visited = [False] * (N+1)
@@ -40,7 +38,6 @@ for i in range(1, N+1):
     if is_know[i]:
         visited[i] = True
         bfs(G, is_know, visited, i)
-
 
 # 거짓말 파티 구하기
 answer = 0
