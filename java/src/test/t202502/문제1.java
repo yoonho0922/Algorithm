@@ -1,4 +1,4 @@
-package test.tving202502;
+package test.t202502;
 
 public class 문제1 {
 
